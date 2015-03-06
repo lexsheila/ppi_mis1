@@ -1,0 +1,69 @@
+<!-- success message -->
+
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 10px; padding-right: 10px; height: 50px;
+}
+</style>
+
+<% if flash[:notice]%>
+  <div class="alert alert-success">
+    <img src="/check.png" width="30" height="20"/><%= flash[:notice]%>
+  </div>
+<!-- error message -->
+<% elsif flash[:notice1]%>
+  <div class="alert alert-danger">
+    <img src="/fail.png" width="30" height="20"/><%= flash[:notice1]%>
+  </div>
+<%end%>
+
+
+
+<div id="container" style="width:600px; border:none; margin-top:50px;">
+  <legend style="margin-left:20px;width:590px; margin-bottom:5px; border-radius:3px; background:#E5FFFF" >Log In</legend> 
+  <fieldset>
+    <div class="span6 well"  style="width:550px; height:250px;box-shadow: 10px 10px 5px #888888;">
+      <!-- login form -->
+      <table style="border:none;">
+
+                <%= form_tag users_login_path, :class=>"form-horizontal" do%>
+                <tr>
+                    <td rowspan="6" style="width:50;">
+                      <img src="/11.png" style="width:50; height:200;"/>
+                    </td>
+                </tr>
+
+                <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= text_field_tag :username, params[:username], :placeholder=>"username" %>
+                        </div>
+                  </div>
+                  </td></tr>
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= password_field_tag :password, :placeholder=>"" %>
+                        </div>
+                  </div>
+                  </td></tr>
+                  
+                  <tr><td>
+              
+                     <div style="padding-left:0px;">
+                        <%= submit_tag "               Log in             ", :class=>"submit" %>
+                     </div>
+      
+                  </td></tr>
+                  
+                <% end %>
+          </table>
+    </div>
+  </fieldset>
+</div>
