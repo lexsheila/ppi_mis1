@@ -1,17 +1,20 @@
 class User < ActiveRecord::Base
 
+  belongs_to :registered_users
+  has_many :passwords
 	
   attr_accessor :password
 
   #validating the form for creating new user
   validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
   validates :password, :confirmation => true #password_confirmation attribute
-  validates_length_of :password, :in => 6..20, :on => :create
-  validates :role, :presence => true
+  validates_length_of :password, :in => 8..20, :on => :create
+  validates :password, :format => {:with => /A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\W])).+z/, message: "must contain at least one uppercase letter, at least one digit and at least one special character."}
+  #validates :role, :presence => true
  
   #call method before appropriate action
   before_save :encrypt_password
-  after_save :clear_fields
+  after_save :clear_fields, :create_timestamp
 
   #method to encrypt user password
   def encrypt_password

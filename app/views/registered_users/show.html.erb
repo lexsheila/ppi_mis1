@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>FirstName:</strong>
+  <%= @registered_user.first_name %>
+</p>
+
+<p>
+  <strong>LastNmae:</strong>
+  <%= @registered_user.last_name %>
+</p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @registered_user.username %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @registered_user.email %>
+</p>
+
+<%= link_to 'Add', new_users_path(@registered_user) %> |
+<%= link_to 'Edit', products_path %>
+<%= link_to 'Destroy', product,:confirm => 'Are you sure?', :method => :delete %>

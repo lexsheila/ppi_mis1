@@ -38,7 +38,7 @@ class UsersController < ApplicationController
             redirect_to :controller=>"admin", :action=>"index"
             #redirect_to admin_index_path
             return true
-          elsif session[:role]=="Cashier"
+          elsif session[:role]=="Valuer"
             #redirect to cashier page
             redirect_to admin_index_path
             return true
@@ -69,6 +69,17 @@ end
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+
+      if @user.save
+        # Tell the UserMailer to send an activation email after save
+        UserMailer.activation_email(@user).deliver_later
+ 
+        format.html { redirect_to(@user, notice: 'User was successfully created.') }
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { render action: 'new' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

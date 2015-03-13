@@ -1,3 +1,4 @@
+hahaha
 <!--pick messages from the controller-->
 <% if flash[:notice1]%>
 	<div class="alert alert-success">
@@ -10,54 +11,67 @@
 	</div>
 <%end%>
 
-
-<legend> Add System User </legend>
+<legend>System Settings </legend>
 
 <div id="container">
 	<fieldset>
 		<div class="span6 well">
 			<!-- form adds new items to item database -->
-			<%= form_for(:user, :url => {:controller => 'users', :action => 'create'}, :html=>{ :class=>"form-horizontal"}) do |f| %>
+			<%= form_for(:configurations, :url => {:controller => 'configurations', :action => 'create'}, :html=>{ :class=>"form-horizontal"}) do |f| %>
 				<!-- checking for any form errors -->
-				<% if @user.errors.any? %>
+				<% if @configurations.errors.any? %>
 					<div class="alert alert-danger">
-						<%@user.errors.full_messages.each do |message_error| %>
+						<%@configurations.errors.full_messages.each do |message_error| %>
 							<%= message_error %>
 						<% end %>
 					</div>
 				<% end %>
 				<!-- adding form fields -->
 				<div class="control-group">
-					<%= f.label :username, class: "control-label" %>
+					<%= f.label :password_expiration, class: "control-label" %>
 					<div class="controls">
-						<%= f.text_field :username %>
+						<%= f.text_field :password_expiration %>
 					</div>
 				</div>
 
 				<div class="control-group">
-					<%= f.label :role, class: "control-label" %>
+					<%= f.label :password_length, class: "control-label" %>
 					<div class="controls">
-						<%= f.select(:role, [["Valuer","Valuer"],["Admin","Admin"]]) %>
+						<%= f.text_field :password_length %>
 					</div>
 				</div>
 
 				<div class="control-group">
-					<%= f.label :password, class: "control-label" %>
+					<%= f.label :password_history_count, class: "control-label" %>
 					<div class="controls">
-						<%= f.password_field :password%>
+						<%= f.text_field :password_history_count %>
 					</div>
 				</div>
 
 				<div class="control-group">
-					<%= f.label :Password_Confirmation, class: "control-label" %>
+					<%= f.label :entries_till_lock, class: "control-label" %>
 					<div class="controls">
-						<%= f.password_field :password_confirmation%>
+						<%= f.text_field :entries_till_lock %>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<%= f.label :successive_password_entry, class: "control-label" %>
+					<div class="controls">
+						<%= f.text_field :successive_password_entry %>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<%= f.label :inactive_terminal_closure, class: "control-label" %>
+					<div class="controls">
+						<%= f.text_field :inactive_terminal_closure %>
 					</div>
 				</div>
 
 				<div class="control-group" style="width:220px; margin-left:180px;padding-left:0px; margin-top:2px;">
 					<div class="form-actions" style="padding-left:0px; margin-top:0px;">
-						<%= f.submit "Create User" %>
+						<%= f.submit "Save" %>
 					</div>
 				</div>
 			<% end %><!-- form ends here -->
@@ -69,3 +83,6 @@
 <div style="border: solid 1px;background-color: #9CF2B2;border-radius: 3px;width: inherit;height: 30px;padding-top:5px;">
 <%= link_to "Back", admin_index_path %>
 </div>
+
+
+
