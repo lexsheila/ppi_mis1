@@ -29,11 +29,17 @@ class UsersController < ApplicationController
     if request.post?
       #authenticate user
       user = User.authenticate(params[:username], params[:password])
+     # require 'pry'; binding.pry
         if user
           #set sessions objects for the user
           session[:userid] = user.id
           session[:role] = user.role
           session[:username]= user.username
+            if params[:remember_me]
+             cookies.permanent[:auth_token] = user.auth_token
+            else
+             cookies[:auth_token] = user.auth_token
+            end
           flash[:notice] = "WELCOME "+session[:username]
 
           if session[:role]=="Admin"
@@ -45,6 +51,7 @@ class UsersController < ApplicationController
             redirect_to admin_index_path
             return true
           end
+
         else
           flash[:notice1] = "Wrong Username or password"
           redirect_to :controller=>'users'
@@ -56,16 +63,18 @@ def logout
   session.delete(:userid)
   session.delete(:username)
   session.delete(:role)
+  cookies.delete(:auth_token)
+  #redirect_to root_url, :notice => "Logged out!"
   flash[:notice] = "Logged out successfully"
-  redirect_to users_path
+  redirect_to root_url
 end
 
   # POST /users
   # POST /users.json
   def create
-   @user = User.new(params[:user].permit(:username, :role, :password, :password_confirmation, :email))
+   @user = User.new(params[:user].permit(:username, :role, :password,  :email))
       if @user.save #save the user
-        UserMailer.activation_email(@user).deliver_later
+        UserMailer.password_change(@user).deliver_later
         flash[:notice1] = "New user created" 
         redirect_to new_admin_path
       else          
@@ -112,6 +121,6 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       #params[:user]
-      params.require(:user).permit(:username, :hashed_password, :salt, :role, :email)
+      params.require(:user).permit(:username, :password, :role, :email)
     end
 end

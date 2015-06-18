@@ -1,0 +1,79 @@
+
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 0px; padding-right: 0px; height: 30px; width: 10px; float:center;
+}
+</style>
+
+<% if flash[:notice]%>
+  <div class="alert alert-success">
+    <img src="/check.png" width="30" height="20"/><%= flash[:notice]%>
+  </div>
+<!-- error message -->
+<% elsif flash[:notice1]%>
+  <div class="alert alert-danger">
+    <img src="/fail.png" width="30" height="20"/><%= flash[:notice1]%>
+  </div>
+<%end%>
+
+
+
+<div id="container" style="width:600px; border:none; margin-top:50px;">
+  <legend style="margin-left:20px;width:590px; margin-bottom:5px; border-radius:3px; background:#00c1af" >Log In</legend> 
+  <fieldset>
+    <div class="span6 well"  style="width:550px; height:250px; box-shadow: 10px 10px 5px #888888; background:#7781e8">
+      <!-- login form -->
+      <table style="border:none;">
+
+                <%= form_for(:sessions, :url => {:controller => 'sessions', :action => 'new'}, :html=>{ :class=>"form-horizontal"}) do |f| %>   
+                <tr>
+                    <td rowspan="6" style="width:50;">
+                      <img src="/11.png" style="width:50; height:200;"/>
+                    </td>
+                </tr>
+
+                <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :username, :placeholder=>"username" %>
+                        </div>
+                  </div>
+                  </td></tr>
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.password_field :password, placeholder: "password" %>
+                        </div>
+                  </div>
+                  </td></tr>
+
+                  <tr><td>                        
+                        <div class="checkbox inline" style="padding-left:30px; float:left">
+                        <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+                        <%= label_tag :remember_me %>
+                      </div>                                                 
+                  </td></tr>
+                  
+                  <tr><td>              
+                     <div style="padding-left:50px; float:left">
+                        <%= submit_tag "        Log in        ", :class=>"submit" %>
+                      </div>
+                  </td></tr>
+
+                   <tr><td>
+                    <div style="font-color:#001ac1; float:left;">
+                        <%= link_to "Forgotten Password?", new_password_reset_path %> 
+                    </div>              
+                  </td></tr>
+                  
+                <% end %>
+          </table>
+    </div>
+  </fieldset>
+</div>

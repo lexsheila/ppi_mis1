@@ -1,0 +1,33 @@
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 10px; padding-right: 10px; height: 50px;
+}
+</style>
+
+<% if flash[:notice]%>
+  <div class="alert alert-success">
+    <img src="/check.png" width="30" height="20"/><%= flash[:notice]%>
+  </div>
+<!-- error message -->
+<% elsif flash[:notice1]%>
+  <div class="alert alert-danger">
+    <img src="/fail.png" width="30" height="20"/><%= flash[:notice1]%>
+  </div>
+<%end%>
+
+
+
+<%= form_tag password_resets_path, :method => :post do %>
+  <div class="field">
+    <%= label_tag :email %>
+    <%= text_field_tag :email, params[:email] %>
+  </div>
+  <div class="actions"><%= submit_tag "Reset Password" %></div>
+<% end %>
+

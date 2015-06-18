@@ -1,0 +1,99 @@
+<!--pick messages from the controller-->
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 10px; padding-right: 10px; height: 50px;
+}
+</style>
+
+<% if flash[:notice1]%>
+	<div class="alert alert-success">
+		<img src="/check.png" width="30" height="20"/><%= flash[:notice1]%>
+	</div>
+
+<% elsif flash[:notice2]%>
+	<div class="alert alert-danger">
+		<img src="/fail.png" width="30" height="20"/><%= flash[:notice2]%>
+	</div>
+<%end%>
+
+<div id="container" style="width:600px; border:none; margin-top:20px; float:left; padding-left:350px">
+  <legend style="margin-left:20px;width:590px; margin-bottom:5px; border-radius:3px; background:#E5FFFF" >System Settings</legend> 
+  <fieldset>
+    <div class="span6 well"  style="width:550px; height:400px; box-shadow: 10px 10px 5px #888888;">
+      <!-- login form -->
+      <table style="border:none;">
+                <%= form_for(:user_settings, :url => {:controller => 'user_settings', :action => 'create'}, :html=>{ :class=>"form-horizontal"}) do |f| %>   
+                     <tr>
+                    <td rowspan="8" style="width:50;">
+                      <img src="/set5.jpeg" width="130" height="120" align="left"/>
+                    </td>
+                </tr>                
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.time_field :password_expiration, :placeholder=>"password expiration" %>
+                        </div>
+                  </div>
+                  </td></tr>                  
+
+                  <tr><td>
+                  <div class="control-group" >
+                        <div class="controls">
+                          <%= f.number_field :password_length, :placeholder=>"password length" %>
+                        </div>
+                  </div>
+                  </td></tr>
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.number_field :password_history_count, :placeholder=>"password history count" %>
+                        </div>
+                  </div>
+                  </td></tr>
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.number_field :entries_till_lock, :placeholder=>"wrong entries till lock" %>
+                        </div>
+                  </div>
+                  </td></tr>
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.time_field :successive_password_entry, :placeholder=>"successive password entry" %>
+                        </div>
+                  </div>
+                  </td></tr>
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.time_field :inactive_terminal_closure, :placeholder=>"inactive terminal closure" %>
+                        </div>
+                  </div>
+                  </td></tr>           
+                  
+                  <tr><td>              
+                     <div style="padding-left:0px;">
+                        <%= submit_tag "               Save             ", :class=>"submit" %>
+                     </div>      
+                  </td></tr>
+
+                                   
+                <% end  %>
+          </table>
+    </div>
+  </fieldset>
+</div>
+
+

@@ -1,0 +1,23 @@
+ <%= simple_form_for @property_description, remote: true do |f|   %>
+ <div style="padding-left:30px">
+                  <table style="background-color:#87e5f1;">
+                    <% @property_descriptions.each do |property_description| %>
+                        <tr>
+                          <td>
+                            <%= property_description.code %>
+                          </td>
+
+                          <td>
+                            <%= property_description.description %>
+                          </td>                        
+
+                          <td>
+                            <%= button_to 'Edit', edit_property_description_path(property_description) %>                   
+                          </td> 
+                          <td>                          
+                            <%= button_to 'Delete', property_description, :confirm => 'Are you sure?', :method => :delete %>
+                          </td> 
+                        </tr>                  
+                    <% end %>             
+                  </table></div>
+<%end%>

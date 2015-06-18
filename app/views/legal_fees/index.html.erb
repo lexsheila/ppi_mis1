@@ -1,0 +1,90 @@
+<!--pick messages from the controller-->
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 10px; padding-right: 10px; height: 30px;
+}
+</style>
+
+<% if flash[:notice1]%>
+  <div class="alert alert-success">
+    <img src="/check.png" width="30" height="20"/><%= flash[:notice1]%>
+  </div>
+
+<% elsif flash[:notice2]%>
+  <div class="alert alert-danger">
+    <img src="/fail.png" width="30" height="20"/><%= flash[:notice2]%>
+  </div>
+<%end%>
+
+<div id="container" style="width:600px; border:none; margin-top:10px; float:center;">
+  <legend style="margin-left:20px;width:500px; margin-bottom:5px; border-radius:3px; background:#E5FFFF;" >Legal Fees  :    <%= submit_tag "Update", :class=>"submit" "style=padding-left:100px;padding-right:10px;"  %>
+                 <%= submit_tag "Reset", :class=>"submit" "style=padding-left:10px" %>
+                 <%= submit_tag "List", :class=>"submit" "style=padding-left:10px;" %></legend> 
+  
+    
+          
+        
+  <fieldset>
+    <div class="span6 well"  style="width:460px; height:300px; box-shadow: 10px 10px 5px #888888;">
+      <!-- add valuers table -->
+      <table style="border:none;">
+                <%= form_for(:legal_fee, :url => {:controller => 'legal_fees', :action => 'create'}, :html=>{ :class=>"form-horizontal"}) do |f| %> 
+
+                  <tr>
+                    <td rowspan="6" style="width:50;">
+                      <img src="/money1.jpeg" style="width:50; height:200;"/>
+                    </td>
+                  </tr>                          
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.collection_select(:law_firm_id, LawFirm.all, :id, :company_name) %>
+                        </div>
+                  </div>
+                  </td></tr>                     
+                  
+                    <tr><td>
+                      <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :fees_amount, :placeholder=>"fees amount" %>
+                        </div>
+                      </div></td>       
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :fees_percentage, :placeholder=>"fees percentage" %>
+                            </div>
+                      </div>
+                      </td></tr>
+
+                      <tr><td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_area :remarks, :placeholder=>"remarks" %>
+                            </div>
+                      </div>
+                      </td></tr>                 
+                  
+                  <tr><td>               
+                     <div style="padding-left:60px;">
+                        <%= f.submit "         Save          ", :class=>"submit" %>
+                     </div>      
+                  </td></tr>
+                  
+                <% end %>
+          </table>
+    </div>
+  </fieldset>
+</div>
+
+

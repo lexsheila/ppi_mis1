@@ -1,0 +1,2 @@
+module InsurancePremiumsHelper
+end

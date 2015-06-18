@@ -1,0 +1,207 @@
+<!--pick messages from the controller-->
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 10px; padding-right: 10px; height: 30px;
+}
+</style>
+
+<% if flash[:notice1]%>
+  <div class="alert alert-success">
+    <img src="/check.png" width="30" height="20"/><%= flash[:notice1]%>
+  </div>
+
+<% elsif flash[:notice2]%>
+  <div class="alert alert-danger">
+    <img src="/fail.png" width="30" height="20"/><%= flash[:notice2]%>
+  </div>
+<%end%>
+
+<div id="container" style="width:600px; border:none; margin-top:10px; float:center;">
+  <legend style="margin-left:20px;width:740px; margin-bottom:5px; border-radius:3px; background:#E5FFFF;" >Law Firms  :    <%= submit_tag "Update", :class=>"submit" "style=padding-left:100px;padding-right:10px;"  %>
+                 <%= submit_tag "Reset", :class=>"submit" "style=padding-left:10px" %>
+                 <%= submit_tag "List", :class=>"submit" "style=padding-left:10px;" %></legend> 
+  
+    
+          
+        
+  <fieldset>
+    <div class="span6 well"  style="width:700px; height:700px; box-shadow: 10px 10px 5px #888888;">
+      <!-- add valuers table -->
+      <table style="border:none;">
+                <%= form_for(:law_firm, :url => {:controller => 'law_firms', :action => 'create'}, :html=>{ :class=>"form-horizontal"}) do |f| %>                           
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :company_name, :placeholder=>"company name" %>
+                        </div>
+                  </div>
+                  </td></tr>
+
+                  <tr>
+                    <td>
+                      <div class="control-group" >
+                            <div class="controls">
+                              <%= f.text_field :TIN_NUMBER, :placeholder=>"TIN NUMBER" %>
+                            </div>
+                            </td>                  
+                  
+                    <td>
+                      <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :VAT_NUMBER, :placeholder=>"VAT NUMBER" %></td>
+                        </div>
+                      </div>       
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_area :physical_address, :placeholder=>"physical address" %>
+                            </div>
+                      </div>
+                      </td>
+
+                      <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :postal_address, :placeholder=>"postal address" %>
+                            </div>
+                      </div>
+                      </td>
+                  </tr>
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :contact_person, :placeholder=>"contact person" %>
+                        </div>
+                  </div>
+                  </td></tr>  
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.telephone_field :primary_phone_number, :placeholder=>"primary phone number" %>
+                            </div>
+                      </div>
+                      </td> 
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.telephone_field :other_phone_number, :placeholder=>"other phone number" %>
+                            </div>
+                      </div>
+                    </td>
+                
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.telephone_field :fax, :placeholder=>"FAX" %>
+                            </div>
+                      </div>
+                      </td>
+                  </tr>  
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.email_field :email, :placeholder=>"email" %>
+                        </div>
+                  </div>
+                  </td></tr>  
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :specialization, :placeholder=>"principal activity/specialization" %>
+                        </div>
+                  </div>
+                  </td></tr> 
+
+                  <tr><td style="font-weight:bold;align:left;padding-left:0px;">
+                  LEGAL REPRESENTATIVE 
+                  </td></tr> 
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :legrep_first_name, :placeholder=>"first name" %>
+                            </div>
+                      </div>
+                      </td> 
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :legrep_last_name, :placeholder=>"last name" %>
+                            </div>
+                      </div>
+                    </td>
+                  </tr>  
+
+                  <tr><td style="rowspan:8;">
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :address, :placeholder=>"address" %>
+                        </div>
+                  </div>
+                  </td></tr>  
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.telephone_field :pri_phone_num, :placeholder=>"primary phone number" %>
+                            </div>
+                      </div>
+                      </td> 
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.telephone_field :other_phone_num, :placeholder=>"other phone number" %>
+                            </div>
+                      </div>
+                      </td>
+                  </tr>  
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.email_field :rep_email, :placeholder=>"email" %>
+                        </div>
+                  </div>
+                  </td></tr>  
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_area :remarks, :placeholder=>"remarks" %>
+                        </div>
+                  </div>
+                  </td></tr>                         
+                  
+                  <tr><td>               
+                     <div style="padding-left:60px;">
+                        <%= f.submit "         Save          ", :class=>"submit" %>
+                     </div>      
+                  </td></tr>
+                  
+                <% end %>
+          </table>
+    </div>
+  </fieldset>
+</div>
+
+

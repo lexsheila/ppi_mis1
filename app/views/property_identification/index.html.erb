@@ -1,0 +1,313 @@
+<!--pick messages from the controller-->
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 10px; padding-right: 10px; height: 30px; float: center;
+}
+</style>
+
+<% if flash[:notice1]%>
+  <div class="alert alert-success">
+    <img src="/check.png" width="30" height="20"/><%= flash[:notice1]%>
+  </div>
+
+<% elsif flash[:notice2]%>
+  <div class="alert alert-danger">
+    <img src="/fail.png" width="30" height="20"/><%= flash[:notice2]%>
+  </div>
+<%end%>
+
+<div id="container" style="width:600px; border:none; margin-top:10px; float:left; padding-left:120px;">
+  <legend style="margin-left:20px;width:989px; margin-bottom:5px; border-radius:3px; background:#E5FFFF;" >Property Data :    <%= submit_tag "Confirm", :class=>"submit" "style=padding-left:100px;padding-right:10px;"  %>
+                 <%= submit_tag "Reset", :class=>"submit" "style=padding-left:10px" %>
+                 <%= submit_tag "List", :class=>"submit" "style=padding-left:10px;" %></legend> 
+  
+    
+          
+        
+  <fieldset>
+    <div class="span6 well"  style="width:950px; height:740px; box-shadow: 10px 10px 5px #888888; float:center;">
+      <!-- add valuers table -->
+      <table style="border:none;">
+                <%= form_for(:property_identification, :url => {:controller => 'property_identification', :action => 'create'}, :html=>{ :class=>"form-horizontal"}) do |f| %>                           
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :customer_code, :placeholder=>"Customer Code" %>
+                        </div>
+                      </div>
+                      </td>
+                  
+                    <td>
+                      <div class="control-group" >
+                            <div class="controls">
+                              <%= f.text_field :customer, :placeholder=>"Customer" %>
+                            </div>
+                            </td> 
+                  </tr>                 
+                  
+                    <tr><td>
+                      <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :tenure_system, :placeholder=>"Tenure System" %></td>
+                        </div>
+                      </div>       
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :LRV, :placeholder=>"LRV" %>
+                            </div>
+                      </div>
+                      </td>
+
+                      <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :folio, :placeholder=>"Folio" %>
+                            </div>
+                      </div>
+                      </td>
+                  </tr>
+
+                  <tr><td>
+                    <div class="control-group">
+                          <div class="controls">
+                            <%= f.text_field :lease_effective_date, :placeholder=>"Lease Effective Date(years)" %>
+                          </div>
+                        </div>
+                        </td> 
+                    
+                        <td>
+                          <div class="control-group">
+                                <div class="controls">
+                                  <%= f.text_field :lease_expiry_date, :placeholder=>"Lease Expiry Date(years)" %>
+                                </div>
+                          </div>
+                        </td> 
+                  </tr>
+
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :lease_tenor, :placeholder=>"Lease Tenor" %>
+                            </div>
+                      </div>
+                    </td>
+                
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :outstanding_lease_tenor, :placeholder=>"Outstanding Lease Tenor" %>
+                            </div>
+                      </div>
+                      </td>
+                  </tr>  
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :unit, :placeholder=>"Unit" %>
+                            </div>
+                      </div>
+                    </td> 
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :flat, :placeholder=>"Flat" %>
+                            </div>
+                      </div>
+                    </td>                  
+
+                  
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :block, :placeholder=>"Block" %>
+                            </div>
+                      </div>
+                    </td> 
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :plot, :placeholder=>"Plot" %>
+                            </div>
+                      </div>
+                    </td>
+                  </tr>  
+
+                  <tr>
+                    <td style="rowspan:8;">
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :road_location, :placeholder=>"Road Location" %>
+                            </div>
+                      </div>
+                    </td> 
+                  
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :area, :placeholder=>"Area" %>
+                            </div>
+                      </div>
+                    </td>
+                  </tr> 
+
+                  <tr>  
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :district, :placeholder=>"District" %>
+                            </div>
+                      </div>
+                    </td>                    
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :county, :placeholder=>"County" %>
+                            </div>
+                      </div>
+                    </td>  
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :sub_county, :placeholder=>"Sub_County" %>
+                            </div>
+                      </div>
+                    </td>                   
+
+                  
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :parish, :placeholder=>"Parish" %>
+                            </div>
+                      </div>
+                    </td>
+                  </tr> 
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :LC, :placeholder=>"L.C." %>
+                            </div>
+                      </div>
+                    </td>
+                  </tr> 
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :land_area_hectares, :placeholder=>"Land Area(Hectares)" %>
+                            </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :land_area_acres, :placeholder=>"Land Area(Acres)" %>
+                            </div>
+                      </div>
+                    </td>
+                  </tr> 
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :built_area, :placeholder=>"Built Area (Sq. Metres)" %>
+                            </div>
+                      </div>
+                    </td> 
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.collection_select(:property_description_id, PropertyDescription.all, :id, :description) %>
+                            </div>
+                      </div>
+                    </td>
+                  </tr> 
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.number_field :number_of_units, :placeholder=>"Number of Units/Houses" %>
+                            </div>
+                      </div>
+                    </td> 
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :property_type, :placeholder=>"Property Type" %>
+                            </div>
+                      </div>
+                    </td>
+                  </tr> 
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.number_field :number_of_bedrooms, :placeholder=>"Number of Bedrooms" %>
+                            </div>
+                      </div>
+                    </td> 
+
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :property_status, :placeholder=>"Property Status(%completion)" %> 
+                            </div>
+                      </div>
+                    </td>
+                  </tr> 
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :roof_type, :placeholder=>"Roof Type" %>
+                        </div>
+                  </div>
+                  </td></tr> 
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_area :additional_description, :placeholder=>"Additional Description" %>
+                        </div>
+                  </div>
+                  </td></tr>                         
+                  
+                  <tr "float:center;"><td "float:center;">               
+                     <div style="padding-left:100px;">
+                        <%= f.submit "         Save          ", :class=>"submit" %>
+                     </div>      
+                  </td></tr>
+                  
+                <% end %>
+          </table>
+    </div>
+  </fieldset>
+</div>

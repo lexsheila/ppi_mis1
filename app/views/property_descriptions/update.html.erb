@@ -1,0 +1,75 @@
+<!--pick messages from the controller-->
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 10px; padding-right: 10px; height: 30px;
+}
+</style>
+
+<% if flash[:notice1]%>
+  <div class="alert alert-success">
+    <img src="/check.png" width="30" height="20"/><%= flash[:notice1]%>
+  </div>
+
+<% elsif flash[:notice2]%>
+  <div class="alert alert-danger">
+    <img src="/fail.png" width="30" height="20"/><%= flash[:notice2]%>
+  </div>
+<%end%>
+
+<div id="container" style="width:600px; border:none; margin-top:10px; float:center;">
+  <legend style="margin-left:20px;width:500px; margin-bottom:5px; border-radius:3px; background:#E5FFFF;" >Property Descriptions  </legend>           
+        
+  <fieldset>
+    <div class="span6 well"  style="width:460px; height:auto; box-shadow: 10px 10px 5px #888888;">
+        
+      <!-- add descriptions table -->
+      <div style="padding-top:-20px">
+      <table style="border:none; padding-top:50px">                  
+
+                
+                <%= form_for(:property_description, :url => {:controller => 'property_descriptions', :action => 'update'}, :html=>{ :class=>"form-horizontal"}) do |f| %> 
+
+                  <tr>
+                    <td rowspan="6" style="width:50;">
+                      <img src="/edit.png" style="width:50; height:200;"/>
+                    </td>
+                  </tr>
+                        
+                  <tr><td>
+                      <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :code, :placeholder=>"Code" %>
+                        </div>
+                      </div></td>       
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :description, :placeholder=>"Description" %>
+                            </div>
+                      </div>
+                      </td></tr>                                     
+                  
+                  <tr><td>               
+                     <div style="padding-left:60px;">
+                        <%= f.submit "     Save      ", :class=>"submit" %>
+                     </div>      
+                  </td></tr>
+                  
+                <% end %>                 
+          </table>
+        </div>
+    </div>
+  </fieldset>
+</div>
+  </table>
+</div>
+<br />

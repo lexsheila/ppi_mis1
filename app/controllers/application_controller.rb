@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   #before_filter :login_required, :except=>[:index, :login]
 
+  helper_method :current_user
+
 
   def login_required
 		if session[:userid]
@@ -24,5 +26,13 @@ class ApplicationController < ActionController::Base
 	    return true
 	  end
   end
+
+
+  private
+  def current_user
+    @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
+  end
+
+
 
 end

@@ -1,0 +1,103 @@
+<!--pick messages from the controller-->
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 10px; padding-right: 10px; height: 30px;
+}
+</style>
+
+<% if flash[:notice1]%>
+  <div class="alert alert-success">
+    <img src="/check.png" width="30" height="20"/><%= flash[:notice1]%>
+  </div>
+
+<% elsif flash[:notice2]%>
+  <div class="alert alert-danger">
+    <img src="/fail.png" width="30" height="20"/><%= flash[:notice2]%>
+  </div>
+<%end%>
+
+<div id="container" style="width:600px; border:none; margin-top:10px; float:center;">
+  <legend style="margin-left:20px;width:500px; margin-bottom:5px; border-radius:3px; background:#E5FFFF;" >Property Descriptions</legend>    
+          
+        
+  <fieldset>
+    <div class="span6 well"  style="width:460px; height:auto; box-shadow: 10px 10px 5px #888888; background:#94ebeb;">
+       
+       <div style="padding-left:30px">
+                  <table style="background-color:#3e98ff;">
+                    <% @property_descriptions.each do |property_description| %>
+                        <tr>
+                          <td>
+                            <%= property_description.code %>
+                          </td>
+
+                          <td>
+                            <%= property_description.description %>
+                          </td>                        
+
+                          <td>
+                            <%= link_to 'Edit', property_description_path(property_description) %>                 
+                          </td> 
+                          <td>                          
+                            <%= link_to 'Delete', property_description, :confirm => 'Are you sure?', :method => :delete %>
+                          </td> 
+                        </tr>                  
+                    <% end %>             
+                  </table></div>      
+      <!-- add valuers table -->
+      <div style="padding-top:-20px">
+      <table style="border:none; padding-top:50px">                  
+
+                
+                <%= form_for(:property_description, :url => {:controller => 'property_descriptions', :action => 'create'}, :html=>{ :class=>"form-horizontal"}) do |f| %> 
+
+                  <tr>
+                    <td rowspan="6" style="width:50;">
+                      <img src="/images17.jpeg" style="width:30; height:150;"/>
+                    </td>
+                  </tr>
+                        
+                  <tr><td>
+                      <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :code, :placeholder=>"Code" %>
+                        </div>
+                      </div></td>       
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_field :description, :placeholder=>"Description" %>
+                            </div>
+                      </div>
+                      </td></tr>                                     
+                  
+                  <tr><td>               
+                     <div style="padding-left:60px;">
+                        <%= f.submit "     Add New      ", :class=>"submit" %>
+                     </div>      
+                  </td></tr>
+
+                  <tr>
+                    <td>
+                  <%= submit_tag "Add New", :class=>"submit" "style=padding-left:100px;padding-right:10px;" %>
+                  <%= submit_tag "Reset", :class=>"submit" "style=padding-left:10px" %>
+                  <%= submit_tag "Find", :class=>"submit" "style=padding-left:10px;" %>
+                  <%= submit_tag "List", :class=>"submit" "style=padding-left:10px;" %>
+                    </td>
+                  </tr>
+
+                <% end %>                 
+          </table>
+        </div>
+    </div>
+  </fieldset>
+</div>
