@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   resources :users
   resources :admin
-  resources :configurations
-  resources :registered_users
 
   post "users/login"
  # get "admin/admin_dashboard"
@@ -10,9 +8,7 @@ Rails.application.routes.draw do
 
   delete 'logout' => 'users#logout'
 
-  get "configurations/index"
-
-  post "registered_users/create"
+  get "admin/show"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

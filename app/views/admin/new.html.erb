@@ -1,0 +1,104 @@
+<!-- success message -->
+
+<style>
+
+tr{
+
+  border:none;
+}
+.submit{
+
+  border-radius: 4px; background: 9ade7c; font-weight: bold; padding-left: 10px; padding-right: 10px; height: 50px;
+}
+</style>
+
+<% if flash[:notice1]%>
+  <div class="alert alert-success">
+    <img src="/check.png" width="30" height="20"/><%= flash[:notice1]%>
+  </div>
+<!-- error message -->
+<% elsif flash[:notice2]%>
+  <div class="alert alert-danger">
+    <img src="/fail.png" width="30" height="20"/><%= flash[:notice2]%>
+  </div>
+<%end%>
+
+
+<div id="container" style="width:600px; border:none; margin-top:50px; float:center">
+  <legend style="margin-left:20px;width:540px; margin-bottom:5px; border-radius:3px; background:#E5FFFF" >Create User.</legend> 
+  <fieldset>
+    <div class="span6 well"  style="width:500px; height:370px;box-shadow: 10px 10px 5px #888888;">
+      <!-- login form -->
+      <table style="border:none;">
+                <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}, :html=>{ :class=>"form-horizontal"}) do |f| %>   
+                     <tr>
+                    <td rowspan="6" style="width:50;">
+                      <img src="/user.jpg" style="width:50; height:200;"/>
+                    </td>
+                </tr>
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :username, :placeholder=>"username" %>
+                        </div>
+                  </div>
+                  </td></tr>
+
+                  <tr><td>
+                  <div class="control-group" >
+                        <div class="controls">
+                          <%= f.password_field :password, :placeholder=>"password" %>
+                        </div>
+                  </div>
+                  </td></tr>
+
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.password_field :password_confirmation, :placeholder=>"password_confirmation" %>
+                        </div>
+                  </div>
+                  </td></tr>
+
+                  <tr><td>
+                    <div>
+                      <%= f.select(:role, [["Valuer","Valuer"],["Admin","Admin"],["Ordinary","Ordinary"]]) %>
+                        </div>
+                  </div>
+                  </td></tr>
+                  
+                  <tr><td>
+                  <div class="control-group">
+                        <div class="controls">
+                          <%= f.text_field :email, :placeholder=>"Email:from@example.com" %>
+                        </div>
+                  </div>
+                  </td></tr>
+                  
+                  
+                  <tr><td>
+              
+                     <div style="padding-left:0px;">
+                        <%= submit_tag "               Create User             ", :class=>"submit" %>
+                     </div>
+      
+                  </td></tr>
+                  
+                <% end %>
+          </table>
+    </div>
+  </fieldset>
+</div>
+
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>

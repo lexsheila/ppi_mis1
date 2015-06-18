@@ -1,20 +1,26 @@
 class User < ActiveRecord::Base
 
-  belongs_to :registered_users
-  has_many :passwords
+  #has_many :passwords
 	
   attr_accessor :password
 
   #validating the form for creating new user
-  validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
-  validates :password, :confirmation => true #password_confirmation attribute
-  validates_length_of :password, :in => 8..20, :on => :create
-  validates :password, :format => {:with => /A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\W])).+z/, message: "must contain at least one uppercase letter, at least one digit and at least one special character."}
+  validates :username, :presence => true #:message => "Username can't be blank." #:uniqueness => true, :length => { :in => 3..20 }
+  validates :password, presence: :true
+  validates :password_confirmation, presence: true
+  validates :password, confirmation: true #password_confirmation attribute
+  validates :email, :presence => true
+  validates :password, length: { in: 8..20 }, :on => :create
+  #validates_uniqueness_of :username, message: "This username has already been taken."
+  #validates_uniqueness_of :email, message: "This email already exists." 
+  #validates :first_name, :last_name, :username, :email, :presence => true, :on => :create 
+  validates :password, :format => {:with => /A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\W])).+\z/, message: "must contain at least one uppercase letter, at least one digit and at least one special character."}
+  
   #validates :role, :presence => true
  
   #call method before appropriate action
   before_save :encrypt_password
-  after_save :clear_fields, :create_timestamp
+  after_save :clear_fields
 
   #method to encrypt user password
   def encrypt_password
@@ -26,8 +32,11 @@ class User < ActiveRecord::Base
   #method to clear fields
   def clear_fields
     self.password=nil
-    self.username=nil
     self.role=nil
+    self.username=nil
+    self.email=nil
+    self.password_confirmation=nil
+    #self.email=nil
   end
   #authenticating a system user
   def self.authenticate(username, password)

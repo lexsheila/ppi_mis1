@@ -13,8 +13,8 @@
     <!-- check if user is logged in -->
     <% if session[:userid] %>
       <div id="logout">         
-        <%= session[:user_name] %> | <%= session[:role] %>
-        <%= link_to "Log out", logout_path, method: :delete%>        
+        <%= session[:username] %> | <%= session[:role] %>
+        <%= link_to "Logout", logout_path, method: :delete%>        
       </div>
     <% end %>
     <div id="flash">

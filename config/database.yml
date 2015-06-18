@@ -11,7 +11,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: ppimis_development
+  database: ppimis1_development
   pool: 5
   username: root
   password: m0n@715@
@@ -23,7 +23,7 @@ development:
 test: &test
   adapter: mysql2
   encoding: utf8
-  database: ppimis_test
+  database: ppimis1_test
   pool: 5
   username: root
   password: m0n@715@
@@ -32,7 +32,7 @@ test: &test
 production:
   adapter: mysql2
   encoding: utf8
-  database: ppimis_production
+  database: ppimis1_production
   pool: 5
   username: root
   password: m0n@715@

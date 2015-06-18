@@ -5,12 +5,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+     
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+     @users=User.all
+    #@user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -31,12 +33,12 @@ class UsersController < ApplicationController
           #set sessions objects for the user
           session[:userid] = user.id
           session[:role] = user.role
-          session[:user_name]= user.username
-          flash[:notice] = "WELCOME "+session[:user_name]
+          session[:username]= user.username
+          flash[:notice] = "WELCOME "+session[:username]
 
           if session[:role]=="Admin"
-            redirect_to :controller=>"admin", :action=>"index"
-            #redirect_to admin_index_path
+            #redirect_to :controller=>"admin", :action=>"index"
+            redirect_to admin_index_path
             return true
           elsif session[:role]=="Valuer"
             #redirect to cashier page
@@ -50,39 +52,30 @@ class UsersController < ApplicationController
     end
   end  
   
-  def logout
+def logout
   session.delete(:userid)
-  session.delete(:user_name)
+  session.delete(:username)
   session.delete(:role)
-  flash[:notice] = "GOODBYE!!"
+  flash[:notice] = "Logged out successfully"
   redirect_to users_path
 end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-
-      if @user.save
-        # Tell the UserMailer to send an activation email after save
+   @user = User.new(params[:user].permit(:username, :role, :password, :password_confirmation, :email))
+      if @user.save #save the user
         UserMailer.activation_email(@user).deliver_later
- 
-        format.html { redirect_to(@user, notice: 'User was successfully created.') }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        flash[:notice1] = "New user created" 
+        redirect_to new_admin_path
+      else          
+        @user.errors.full_messages.each do |message_error|   
+          flash[:notice2] = message_error
+          redirect_to :controller=>"admin", :action=>"new" 
+          return false 
+        end
+
       end
-    end
   end
 
   # PATCH/PUT /users/1
@@ -119,6 +112,6 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       #params[:user]
-      params.require(:user).permit(:username, :role, :password, :password_confirmation)
+      params.require(:user).permit(:username, :hashed_password, :salt, :role, :email)
     end
 end
